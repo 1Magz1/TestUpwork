@@ -11,11 +11,10 @@ const setHTTPClientInstance = (instance: any): void => {
   axios = instance;
 };
 
-const $get = (url: string, config?: any): any =>
-  axios.$get(url, config || null);
+const $get = (url: string, config?: any): any => axios.get(url, config || null);
 
 const $post = (url: string, data?: any, config?: any): any =>
-  axios.$post(url, data, config);
+  axios.post(url, data, config);
 
 export default {
   $get,

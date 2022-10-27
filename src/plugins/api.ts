@@ -3,7 +3,8 @@ import api, { IApiService, setHTTPClientInstance } from "@/api";
 
 const httpServicePlugin = {
   install(Vue: any) {
-    setHTTPClientInstance(axios.create());
+    const axiosInstance = axios.create();
+    setHTTPClientInstance({ ...axiosInstance });
     Vue.config.globalProperties.$api = api;
   },
 };
