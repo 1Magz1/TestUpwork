@@ -40,4 +40,7 @@
     border-color: #0a0a23;
     color: #0a0a23;
   }
+  &:disabled {
+    opacity: 0.5;
+  }
 }
