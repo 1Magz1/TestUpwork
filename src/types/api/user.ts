@@ -3,6 +3,13 @@ export interface IUserPayload {
   password: string;
 }
 
-export interface IUserResponse {
+export interface IUserInfo {
+  id: number;
   name: string;
+  secondName: string;
+  profession: string;
+}
+
+export interface IUserResponse {
+  data: IUserInfo;
 }
