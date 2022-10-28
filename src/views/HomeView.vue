@@ -18,6 +18,8 @@
 import { defineComponent } from "vue";
 import store from "@/store";
 import BaseInput from "@/components/ui/BaseInput/index.vue";
+import { mapGetters } from "vuex";
+import { USER_GETTERS } from "@/types/store";
 
 export default defineComponent({
   name: "home-page",
@@ -31,6 +33,9 @@ export default defineComponent({
     BaseInput,
   },
   computed: {
+    ...mapGetters({
+      isLogin: USER_GETTERS.GET_IS_USER_LOGIN,
+    }),
     textInputOptions() {
       return {
         id: "input1",
@@ -61,11 +66,20 @@ export default defineComponent({
         password: this.password,
       };
       try {
-        await store.dispatch("requestLogin", payload);
+        const res = await store.dispatch("requestLogin", payload);
+        if (res) {
+          this.$router.push("/info");
+        }
       } catch (e) {
         console.log("Toast error", e);
       }
     },
+  },
+  beforeCreate() {
+    const isLogin = sessionStorage.getItem("isLogin");
+    if (isLogin === "true") {
+      this.$router.push("/info");
+    }
   },
 });
 </script>
