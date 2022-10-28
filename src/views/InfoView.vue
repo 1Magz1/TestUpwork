@@ -3,7 +3,7 @@
     <h2 class="title">User info</h2>
     <div class="wrapper">
       <user-card class="info__card" :data="userInfo" />
-      <button class="btn" @click="exit">Exit</button>
+      <button class="btn" @click="exit">Logout</button>
     </div>
   </div>
 </template>
@@ -31,6 +31,14 @@ export default defineComponent({
       store.dispatch("logOut");
       this.$router.push("/");
     },
+  },
+  beforeMount() {
+    const isLogin = sessionStorage.getItem("isLogin");
+    if (isLogin === "true" && Object.keys(this.userInfo).length > 0) {
+      store.dispatch("logIn");
+    } else {
+      this.$router.push("/");
+    }
   },
 });
 </script>

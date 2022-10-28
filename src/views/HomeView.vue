@@ -14,7 +14,7 @@
             @inputValue="updatePasswordInput"
             :options="passwordInputOptions"
           />
-          <button class="btn" type="submit">Submit</button>
+          <button class="btn" type="submit">Login</button>
         </form>
       </div>
     </div>
@@ -42,6 +42,7 @@ export default defineComponent({
   computed: {
     ...mapGetters({
       isLogin: USER_GETTERS.GET_IS_USER_LOGIN,
+      userInfo: USER_GETTERS.GET_USER_INFO,
     }),
     textInputOptions() {
       return {
@@ -82,9 +83,10 @@ export default defineComponent({
       }
     },
   },
-  beforeCreate() {
+  beforeMount() {
     const isLogin = sessionStorage.getItem("isLogin");
-    if (isLogin === "true") {
+    if (isLogin === "true" && Object.keys(this.userInfo).length > 0) {
+      store.dispatch("logIn");
       this.$router.push("/info");
     }
   },
