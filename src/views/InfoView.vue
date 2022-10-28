@@ -1,7 +1,10 @@
 <template>
-  <div class="about">
-    <user-card :data="userInfo" />
-    <button @click="exit">Exit</button>
+  <div class="info page">
+    <h2 class="title">User info</h2>
+    <div class="wrapper">
+      <user-card class="info__card" :data="userInfo" />
+      <button @click="exit">Exit</button>
+    </div>
   </div>
 </template>
 
@@ -31,3 +34,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped lang="scss">
+.info {
+  &__card {
+    margin-bottom: 30px;
+  }
+}
+</style>

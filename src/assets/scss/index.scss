@@ -1,1 +1,15 @@
 @import "_reset";
+
+.page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: calc(100vh - 68px);
+}
+
+.title {
+  font-size: 25px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
