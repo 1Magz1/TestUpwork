@@ -14,7 +14,9 @@
             @inputValue="updatePasswordInput"
             :options="passwordInputOptions"
           />
-          <button class="btn" type="submit">Login</button>
+          <button :disabled="isBtnDisabled" class="btn" type="submit">
+            Login
+          </button>
         </form>
       </div>
     </div>
@@ -34,6 +36,7 @@ export default defineComponent({
     return {
       email: "",
       password: "",
+      isLoading: false,
     };
   },
   components: {
@@ -60,6 +63,10 @@ export default defineComponent({
         placeholder: "Please enter your password",
       };
     },
+    isBtnDisabled(): boolean {
+      const isCompleteForm = this.email.length > 0 && this.password.length > 0;
+      return this.isLoading ? this.isLoading : !isCompleteForm;
+    },
   },
   methods: {
     updateLoginInput(value: string) {
@@ -69,6 +76,7 @@ export default defineComponent({
       this.password = value;
     },
     async requestLogin() {
+      this.isLoading = true;
       const payload = {
         login: this.email,
         password: this.password,
@@ -80,6 +88,8 @@ export default defineComponent({
         }
       } catch (e) {
         console.log("Toast error", e);
+      } finally {
+        this.isLoading = false;
       }
     },
   },
