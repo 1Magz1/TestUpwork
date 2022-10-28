@@ -1,15 +1,22 @@
 <template>
-  <div class="home">
-    <div class="card">
-      <h2>Please login</h2>
-      <form @submit.prevent="requestLogin">
-        <BaseInput @inputValue="updateLoginInput" :options="textInputOptions" />
-        <BaseInput
-          @inputValue="updatePasswordInput"
-          :options="passwordInputOptions"
-        />
-        <button type="submit">Submit</button>
-      </form>
+  <div class="home page">
+    <div class="wrapper">
+      <h2 class="title">Please login</h2>
+      <div class="home__card card">
+        <form @submit.prevent="requestLogin">
+          <BaseInput
+            class="home__card-input"
+            @inputValue="updateLoginInput"
+            :options="textInputOptions"
+          />
+          <BaseInput
+            class="home__card-input"
+            @inputValue="updatePasswordInput"
+            :options="passwordInputOptions"
+          />
+          <button class="btn" type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
 </template>
@@ -83,3 +90,11 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped lang="scss">
+.home {
+  &__card-input {
+    margin-bottom: 15px;
+  }
+}
+</style>

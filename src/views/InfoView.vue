@@ -3,7 +3,7 @@
     <h2 class="title">User info</h2>
     <div class="wrapper">
       <user-card class="info__card" :data="userInfo" />
-      <button @click="exit">Exit</button>
+      <button class="btn" @click="exit">Exit</button>
     </div>
   </div>
 </template>
