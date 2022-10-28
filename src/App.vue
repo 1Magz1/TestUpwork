@@ -1,10 +1,14 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/info">info</router-link>
-  </nav>
+  <HeaderComponent />
   <router-view />
 </template>
+
+<script>
+import HeaderComponent from "@/components/App/Header";
+export default {
+  components: { HeaderComponent },
+};
+</script>
 
 <style lang="scss">
 #app {
