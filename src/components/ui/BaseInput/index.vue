@@ -1,7 +1,10 @@
 <template>
   <div class="base-input">
-    <label :for="options.id">{{ options.label }}</label>
+    <label class="base-input__label" :for="options.id">{{
+      options.label
+    }}</label>
     <input
+      class="base-input__input"
       v-model="inputValue"
       :id="options.id"
       :type="options.type"
@@ -47,10 +50,19 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .base-input {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  &__label {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  &__input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid antiquewhite;
+  }
 }
 </style>
