@@ -41,6 +41,9 @@
     color: #0a0a23;
   }
   &:disabled {
+    background-color:#0a0a23;
+    border-color: #fff;
+    color: #fff;
     opacity: 0.5;
   }
 }
