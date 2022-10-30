@@ -47,3 +47,11 @@
     opacity: 0.5;
   }
 }
+
+.toast {
+  position: fixed;
+  bottom: 50px;
+  right: 20px;
+  width: 100%;
+  max-width: 320px;
+}

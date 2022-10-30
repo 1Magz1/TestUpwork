@@ -7,17 +7,22 @@
           <BaseInput
             class="home__card-input"
             @inputValue="updateLoginInput"
+            :value="email"
             :options="textInputOptions"
           />
           <BaseInput
             class="home__card-input"
             @inputValue="updatePasswordInput"
+            :value="password"
             :options="passwordInputOptions"
           />
           <button :disabled="isBtnDisabled" class="btn" type="submit">
             Login
           </button>
         </form>
+      </div>
+      <div v-if="isShowToast" class="toast">
+        <BaseToast @close="closeToast" :text="toastText" class="home__toast" />
       </div>
     </div>
   </div>
@@ -27,6 +32,7 @@
 import { defineComponent } from "vue";
 import store from "@/store";
 import BaseInput from "@/components/ui/BaseInput/index.vue";
+import BaseToast from "@/components/ui/BaseToast/index.vue";
 import { mapGetters } from "vuex";
 import { USER_GETTERS } from "@/types/store";
 
@@ -37,10 +43,13 @@ export default defineComponent({
       email: "",
       password: "",
       isLoading: false,
+      isShowToast: false,
+      timerId: 0,
     };
   },
   components: {
     BaseInput,
+    BaseToast,
   },
   computed: {
     ...mapGetters({
@@ -67,6 +76,9 @@ export default defineComponent({
       const isCompleteForm = this.email.length > 0 && this.password.length > 0;
       return this.isLoading ? this.isLoading : !isCompleteForm;
     },
+    toastText() {
+      return "The email address or password is incorrect.";
+    },
   },
   methods: {
     updateLoginInput(value: string) {
@@ -87,10 +99,24 @@ export default defineComponent({
           this.$router.push("/info");
         }
       } catch (e) {
-        console.log("Toast error", e);
+        this.email = "";
+        this.password = "";
+        this.showToast();
+        console.log("Error", e);
       } finally {
         this.isLoading = false;
       }
+    },
+    showToast() {
+      this.isShowToast = true;
+      this.timerId = setTimeout(() => {
+        this.isShowToast = false;
+        clearTimeout(this.timerId);
+      }, 5000);
+    },
+    closeToast() {
+      this.isShowToast = false;
+      clearTimeout(this.timerId);
     },
   },
   beforeMount() {
