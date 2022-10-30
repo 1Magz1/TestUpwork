@@ -2,6 +2,7 @@ import axios from "axios";
 import api, { IApiService, setHTTPClientInstance } from "@/api";
 
 const httpServicePlugin = {
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   install(Vue: any) {
     const axiosInstance = axios.create({
       baseURL: "https://e4514330-641e-4461-9363-abecdca5acdd.mock.pstmn.io",
